@@ -14,7 +14,7 @@
  * All failures are contained and returned as ChainExecutionResult.
  */
 
-import { ChainDefinition, ChainAgent, ChainAgentContextMode as ContextMode, ChainConfig as ChainAgentConfig } from '../chain-loader/chain-loader.js';
+import { ChainDefinition, ChainAgent, ContextMode as ContextMode, ChainConfig as ChainAgentConfig } from '../chain-loader/chain-loader.js';
 import { ChainAgentDependencyGraph } from '../chain-loader/dependency-graph.js';
 import { CheckpointManager } from './checkpoint-manager.js';
 import type { CheckpointData } from './checkpoint-manager.js';
@@ -476,7 +476,7 @@ export class ChainExecutor {
   private getCallbackTimeout(callbackName: string): number {
     if (!this.executionTimeoutConfig?.disableTimeouts) {
       const key = `${callbackName}TimeoutMs` as keyof CallbackTimeoutConfig;
-      return this.executionTimeoutConfig[key as keyof CallbackTimeoutConfig] ?? 0;
+      return (this.executionTimeoutConfig[key as keyof CallbackTimeoutConfig] as number) ?? 0;
      }
     return 0; // Disable all timeouts when flag is set
   }
@@ -640,7 +640,7 @@ export class ChainExecutor {
           // Build context
           const priorResults = agentResults.slice(0, agentResults.length);
           const context = this.buildContext(
-            agent.contextMode ?? 'inherit_compact',
+            agent.context_mode ?? 'inherit_compact',
             parentContext,
             priorResults
           );
@@ -711,7 +711,7 @@ export class ChainExecutor {
             turns: 0,
             tokens: 0,
             durationMs: 0,
-            contextMode: agent.contextMode ?? 'inherit_compact',
+            contextMode: agent.context_mode ?? 'inherit_compact',
             variables: {}
           };
 
@@ -866,6 +866,7 @@ export class ChainExecutor {
       agentResults: [],
       aggregatedResult: '',
       chainConfig: {},
+      variables: {},
       metrics: {
         totalTurns: 0,
         totalTokens: 0,
@@ -963,7 +964,7 @@ export class ChainExecutor {
           turns: 0,
           tokens: 0,
           durationMs: 0,
-          contextMode: 'inherit_compact',
+          contextMode: 'inherit_compact' as ContextMode,
           variables: {}
         }))
         .slice(0, startAgentIdx)
@@ -993,7 +994,7 @@ export class ChainExecutor {
    */
   private async executeAgentWithRetry(
     chainId: string,
-    agent: ChainAgentContextMode,
+    agent: ChainAgent,
     effectivePrompt: string,
     priorResults: AgentResult[],
     metrics: ExecutionMetrics
@@ -1048,7 +1049,7 @@ export class ChainExecutor {
             turns: 0,
             tokens: 0,
             durationMs: 0,
-            contextMode: agent.contextMode ?? 'inherit_compact',
+            contextMode: agent.context_mode ?? 'inherit_compact',
             variables: {}
            };
          }
@@ -1063,7 +1064,7 @@ export class ChainExecutor {
    */
   private async executeAgentSingles(
     chainId: string,
-    agent: ChainAgentContextMode,
+    agent: ChainAgent,
     effectivePrompt: string,
     priorResults: AgentResult[]
   ): Promise<AgentResult> {
@@ -1085,7 +1086,7 @@ export class ChainExecutor {
       turns: Math.floor(Math.random() * 5) + 1,
       tokens: Math.floor(Math.random() * 1000),
       durationMs: Math.floor(Math.random() * 5000),
-      contextMode: agent.contextMode ?? 'inherit_compact',
+      contextMode: agent.context_mode ?? 'inherit_compact',
       variables: {}
     };
   }
@@ -1111,7 +1112,7 @@ export class ChainExecutor {
       turns: 0,
       tokens: 0,
       durationMs: 0,
-      contextMode: 'inherit_compact',
+      contextMode: 'inherit_compact' as ContextMode,
       variables: {}
     };
   }
@@ -1120,7 +1121,7 @@ export class ChainExecutor {
    * Build effective prompt combining agent prompt, context, and variables.
    */
   private buildEffectivePrompt(
-    agent: ChainAgentContextMode,
+    agent: ChainAgent,
     parentContext: ExtensionContext,
     context: string,
     prompt: string,

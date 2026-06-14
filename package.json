@@ -79,5 +79,8 @@
     },
     "globals": false,
     "environment": "node"
+  },
+  "dependencies": {
+    "yaml": "^2.9.0"
   }
 }

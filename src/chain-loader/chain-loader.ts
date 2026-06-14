@@ -7,10 +7,9 @@
 
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { basename, join, extname } from 'node:path';
-import { parseYaml } from '@earendil-works/pi-coding-agent';
+import { parse as parseYaml } from 'yaml';
 import { ChainAgentDependencyGraph } from './dependency-graph.js';
 import { CheckpointManager } from '../chain-executor/checkpoint-manager.js';
-import type { CheckpointConfig } from '../chain-executor/checkpoint-manager.js';
 import type { CheckpointConfig } from '../chain-executor/checkpoint-manager.js';
 
 // ---- Types ----
@@ -151,7 +150,7 @@ export class ChainLoader {
         const result = this.loadChainFromFile(file);
         if (result.chain) {
           chains.push(result.chain);
-          this.chains.set(result.chain.name, result);
+          this.chains.set(result.chain.name, { chain: result.chain, sourcePath: file, lastModified: Date.now() });
           
           if (this.onChainLoad) {
             this.onChainLoad(result.chain.name);
@@ -168,7 +167,7 @@ export class ChainLoader {
             const result = this.loadChainFromFile(file);
             if (result.chain) {
               chains.push(result.chain);
-              this.chains.set(result.chain.name, result);
+              this.chains.set(result.chain.name, { chain: result.chain, sourcePath: file, lastModified: Date.now() });
               
               if (this.onChainLoad) {
                 this.onChainLoad(result.chain.name);
@@ -304,9 +303,9 @@ export class ChainLoader {
     // Custom resolvers
     for (const [pattern, resolver] of this.variableResolvers) {
       const regex = new RegExp(pattern, 'g');
-      let match: RegExpMatchArray | null;
+      let match: RegExpMatchArray | null | undefined;
       while ((match = regex.exec(template)) !== null) {
-        const resolvedValue = resolver(match, context);
+        const resolvedValue = resolver(match);
         resolved = resolved.replace(match[0], resolvedValue);
       }
     }
@@ -378,7 +377,7 @@ export class ChainLoader {
       warnings.push(`Failed to load ${filePath}: ${errorMsg}`);
       
       if (this.onChainError) {
-        this.onChainError(name, err instanceof Error ? err : new Error(errorMsg));
+        this.onChainError(err instanceof Error ? err : new Error(errorMsg));
       }
       
       return {

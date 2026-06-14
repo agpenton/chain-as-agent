@@ -20,7 +20,7 @@ vi.mock('node:fs', async (importOriginal) => {
 });
 
 // Mock parseYaml
-vi.mock('@earendil-works/pi-coding-agent', () => ({
+vi.mock('yaml', () => ({
   parseYaml: vi.fn(),
 }));
 
@@ -36,7 +36,7 @@ describe('ChainLoader', () => {
     mockFsExistsSync = vi.mocked(fs.existsSync);
     mockFsReaddirSync = vi.mocked(fs.readdirSync);
     mockFsReadFileSync = vi.mocked(fs.readFileSync);
-    mockParseYaml = vi.mocked<any>((await import('@earendil-works/pi-coding-agent')).parseYaml);
+    mockParseYaml = vi.mocked<any>((await import('yaml')).parseYaml);
   });
 
   afterEach(() => {

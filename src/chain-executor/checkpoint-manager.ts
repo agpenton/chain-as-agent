@@ -28,8 +28,14 @@ import {
   copyFileSync
 } from 'node:fs';
 import { join, dirname, basename } from 'node:path';
-import { randomBytes, createHmac, createReadStream } from 'node:crypto';
+import { randomBytes, createHmac, createFileReadStream } from 'node:crypto';
 import { pipeline } from 'node:stream/promises';
+
+// File read helper for checksum
+function createFileReadStream(filePath: BufferEncoding | Uint8Array | URL): { stream: string } {
+  return { stream: readFileSync(filePath).toString() };
+}
+
 import { ReadStream } from 'node:fs';
 
 // ---- Constants ----
