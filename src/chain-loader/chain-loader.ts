@@ -492,10 +492,10 @@ export class ChainLoader {
     
     // Detect cycles in agent dependencies
     const chainGraph = this.buildChainGraph(chain);
-    const cycles = this.chainGraph.detectCycles(chainGraph);
+    const cycles = this.chainGraph.detectCycles(chainGraph) as CycleInfo[];
     if (cycles.length > 0) {
       for (const cycle of cycles) {
-        errors.push(`Circular dependency in chain "${chain.name}": ${cycle.join(' → ')}`);
+        errors.push(`Circular dependency in chain "${chain.name}": ${(cycle.nodes || cycle).join(' → ')}`);
       }
     }
     
@@ -542,7 +542,8 @@ export class ChainLoader {
           if (dep.startsWith('agent_result:')) {
             const agentIdx = parseInt(dep.split(':')[1], 10);
             if (!Number.isNaN(agentIdx)) {
-              graph.addEdge(agent.agent_type, chain.agents[agentIdx]?.agent_type);
+              graph.nodes.add(agent.agent_type);
+            graph.addEdge(agent.agent_type, chain.agents[agentIdx]?.agent_type);
             }
           }
         }
