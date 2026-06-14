@@ -64,7 +64,7 @@ export interface ContextEntry {
   priority?: number;             // Entry priority (for frequency-based)
   frequency?: number;            // Access frequency (for frequency-based)
   tokenCount?: number;           // Estimated token count
-  metadata?: Record<string, unknown>;
+  metadata?: unknown;
 }
 
 /**
@@ -272,7 +272,7 @@ export class ContextCompressor {
   /**
    * Add context entry
    */
-  addEntry(content: string, metadata?: Record<string, unknown>): void {
+  addEntry(content: string, metadata?: unknown): void {
     const entry: ContextEntry = {
       id: generateEntryId(),
       content,
@@ -294,7 +294,7 @@ export class ContextCompressor {
   /**
    * Add multiple context entries
    */
-  addEntries(entries: Array<{ content: string; metadata?: Record<string, unknown> }): void {
+  addEntries(entries: { content: string; metadata?: unknown }[]): void {
     for (const entry of entries) {
       this.addEntry(entry.content, entry.metadata);
     }
