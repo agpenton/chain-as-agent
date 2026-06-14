@@ -1,21 +1,29 @@
-# Development artifacts - remove
-.archive/
-context.md
-research.md
-plan.md
-progress.md  
-TODO.md
-output.txt
-some.txt
-test-chain-prototype.js
+# PI internal tasks and configs
+.pi/tasks/
+.pi/*.md
+.pi/chains/*.yaml
+.pi/archive/
 
-# Testing
+# Testing and coverage
 coverage/
 .nyc_output/
+*.spec.ts
+*.test.ts
 
-# Git
-.git/
-.gitignore
+# Build artifacts
+dist/
+build/
+*.tgz
+*.tar.gz
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environment
+.env
+.env.local
+.env.*.local
 
 # VSCode
 .vscode/
@@ -25,18 +33,12 @@ coverage/
 .DS_Store
 Thumbs.db
 
-# Logs
-*.log
-npm-debug.log*
-
-# Env
-.env
-.env.local
-.env.*.local
-
-# Build
-dist/
-build/
-
-# PI internal tasks and configs
-.pi/tasks/
+# Development
+context.md
+research.md
+plan.md
+progress.md
+TODO.md
+output.txt
+*.txt
+test-chain-prototype.js
