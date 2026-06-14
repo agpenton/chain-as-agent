@@ -53,7 +53,7 @@ export class ChainRegistry {
   private chainLoader: ChainLoader;
   private loadedFiles: Set<string> = new Set();
   
-  constructor(private chainLoader: ChainLoader) {
+  constructor() {
     // Chain loader already initialized
     }
   
