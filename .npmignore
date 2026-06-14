@@ -1,0 +1,42 @@
+# Development artifacts - remove
+.archive/
+context.md
+research.md
+plan.md
+progress.md  
+TODO.md
+output.txt
+some.txt
+test-chain-prototype.js
+
+# Testing
+coverage/
+.nyc_output/
+
+# Git
+.git/
+.gitignore
+
+# VSCode
+.vscode/
+*.code-workspace
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Env
+.env
+.env.local
+.env.*.local
+
+# Build
+dist/
+build/
+
+# PI internal tasks and configs
+.pi/tasks/

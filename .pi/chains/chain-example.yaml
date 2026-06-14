@@ -1,0 +1,43 @@
+# Example chain definition
+# Executable as: /chain-example -- <prompt>
+name: chain-example
+displayName: "Example Chain"
+description: "Demonstrates chain execution with multiple agents"
+version: "1.0"
+
+# Agent pipeline
+agents:
+   # Agent 1: General purpose research
+   - agent_type: general-purpose
+    prompt: "Research the following and provide initial analysis"
+    context_mode: inherit_compact
+    stop_on_error: false
+    timeout_ms: 60000 # 1 minute
+   
+   # Agent 2: Plan execution strategy
+   - agent_type: Plan
+    prompt: "Based on the research, create an execution plan"
+    context_mode: inherit
+    stop_on_error: false
+    timeout_ms: 120000 # 2 minutes
+   
+   # Agent 3: Execute the plan
+   - agent_type: general-purpose
+    prompt: "Execute the plan and produce final output"
+    context_mode: inherit_compact
+    stop_on_error: true # Stop chain on error
+    timeout_ms: 300000 # 5 minutes
+
+# Chain-level configuration
+config:
+  max_total_turns: 100
+  streaming: true
+  aggregate_mode: sequential
+  on_failure: stop
+  variables:
+    chain_name: chain-example
+
+# Metadata
+metadata:
+  author: "chain-admin"
+  tags: ["example", "demo"]

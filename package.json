@@ -1,0 +1,81 @@
+{
+  "name": "@agpenton/chain-as-agent",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Chain-as-Agent extension for PI registry enables composable agent workflows",
+  "author": "Agpenton <agpenton@example.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/agpenton/chain-as-agent.git"
+   },
+  "homepage": "https://github.com/agpenton/chain-as-agent#readme",
+  "bugs": {
+    "url": "https://github.com/agpenton/chain-as-agent/issues"
+   },
+  "keywords": [
+    "pi-agent",
+    "chain",
+    "agentic-workflow",
+    "multi-agent",
+    "plugin"
+   ],
+  "peerDependencies": {
+    "@tintinweb/pi-subagents": "0.10.3"
+   },
+  "peerDependenciesMeta": {
+    "@tintinweb/pi-subagents": {
+       "optional": false
+     }
+   },
+  "scripts": {
+     "test": "vitest run",
+     "test:coverage": "vitest run --coverage",
+     "test:watch": "vitest",
+     "test:ui": "vitest --ui",
+     "typecheck": "tsc --noEmit"
+   },
+   "files": [
+     "README.md",
+     "CHANGELOG.md",
+     "RELEASE.md",
+     "LICENSE",
+     "package.json",
+     "src/**",
+     ".pi/**",
+     "docs/**"
+   ],
+   "devDependencies": {
+     "@vitest/coverage-v8": "^1.6.0",
+     "@vitest/ui": "^1.6.0",
+     "vitest": "^1.6.0"
+   },
+   "vitest": {
+     "coverage": {
+       "provider": "v8",
+       "reportsDirectory": "./coverage",
+       "reporter": [
+         "text",
+         "text-summary",
+         "html",
+         "json"
+       ],
+       "include": [
+         "src/**/*.ts"
+       ],
+       "exclude": [
+         "node_modules",
+         "**/*.spec.ts",
+         "**/*.test.ts"
+       ],
+       "thresholds": {
+         "lines": 95,
+         "branches": 90,
+         "functions": 95,
+         "statements": 95
+       }
+     },
+     "globals": false,
+     "environment": "node"
+   }
+}

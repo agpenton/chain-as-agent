@@ -1,0 +1,75 @@
+{
+  "nextId": 8,
+  "tasks": [
+     {
+       "id": 1,
+       "subject": "Phase 10 - Production Hardening",
+       "description": "Resolve all conditional approval findings (C001, C002, C003, O004).",
+       "status": "completed",
+       "activeForm": "Production hardening complete",
+       "owner": "delegate",
+       "metadata": {
+         "phase": 10,
+         "findings": ["C001", "C002", "C003", "O004"],
+         "status": "resolved",
+         "report": "artifacts/production-hardening.md"
+        },
+       "blocks": [2, 3, 4],
+       "blockedBy": [],
+       "createdAt": "2026-01-15T00:00:00.000Z",
+       "updatedAt": "2026-01-15T17:00:00.000Z"
+      },
+     {
+       "id": 2,
+       "subject": "Phase 11 - Release Readiness Audit",
+       "description": "Perform release-readiness review. Generate artifacts/release-readiness-audit.md",
+       "status": "completed",
+       "activeForm": "Release readiness audit complete",
+       "owner": "delegate",
+       "metadata": {
+         "phase": 11,
+         "report": "artifacts/release-readiness-audit.md",
+         "recommendation": "READY FOR MERGE WITH CONDITIONS"
+        },
+       "blocks": [3, 4],
+       "blockedBy": [1],
+       "createdAt": "2026-01-15T17:00:00.000Z",
+       "updatedAt": "2026-01-15T18:00:00.000Z"
+      },
+     {
+       "id": 3,
+       "subject": "Phase 12 - Production Certification",
+       "description": "Certify project production-ready. Generate artifacts/production-certification.md",
+       "status": "completed",
+       "activeForm": "Production certification complete",
+       "owner": "delegate",
+       "metadata": {
+         "phase": 12,
+         "report": "artifacts/production-certification.md",
+         "decision": "CERTIFIED FOR PRODUCTION"
+        },
+       "blocks": [4],
+       "blockedBy": [1, 2],
+       "createdAt": "2026-01-15T18:00:00.000Z",
+       "updatedAt": "2026-01-15T19:00:00.000Z"
+      },
+     {
+       "id": 4,
+       "subject": "Phase 13 - Release Packaging & Repository Cleanup",
+       "description": "Release packaging complete. Archive planning artifacts, finalize docs, validate build/test. Generate artifacts/release-readiness-summary.md with READY TO PUBLISH recommendation.",
+       "status": "completed",
+       "activeForm": "Release packaging complete",
+       "owner": "delegate",
+       "metadata": {
+         "phase": 13,
+         "report": "artifacts/release-readiness-summary.md",
+         "decision": "READY TO PUBLISH",
+         "archive": ".archive/project-history/"
+        },
+       "blocks": [],
+       "blockedBy": [1, 2, 3],
+       "createdAt": "2026-01-15T19:00:00.000Z",
+       "updatedAt": "2026-01-15T20:00:00.000Z"
+      }
+    ]
+}
