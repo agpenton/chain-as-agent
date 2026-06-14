@@ -262,3 +262,10 @@ See [RELEASE.md](RELEASE.md) for detailed release notes.
 ---
 
 *Chain-as-Agent Extension v1.0.0*
+---
+
+## Publishing
+
+
+
+---
