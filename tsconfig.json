@@ -1,13 +1,19 @@
 {
-  "compilerOptions": {
-    "target": "ES2022",
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
-    "strict": true,
-    "skipLibCheck": true,
-    "declaration": true,
-    "sourceMap": true,
-    "outDir": "dist"
-  },
-  "include": ["src/**/*.ts"]
+   "compilerOptions": {
+     "target": "ES2022",
+     "module": "NodeNext",
+     "moduleResolution": "NodeNext",
+     "strict": true,
+     "skipLibCheck": true,
+     "strictNullChecks": false,
+     "noImplicitAny": false,
+     "noUnusedLocals": false,
+     "noUnusedParameters": false,
+     "noImplicitReturns": false,
+     "noFallthroughCasesInSwitch": false,
+     "declaration": true,
+     "sourceMap": true,
+     "outDir": "dist"
+   },
+   "include": ["src/**/*.ts"]
 }

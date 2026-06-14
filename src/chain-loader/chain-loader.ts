@@ -606,3 +606,6 @@ export interface VariableContext {
   }>;
   fileLoader?: (path: string) => string;
 }
+
+// Backwards compatible export
+export type ChainAgentContextMode = ContextMode;
