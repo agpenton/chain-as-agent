@@ -1,6 +1,6 @@
 {
   "name": "@agpenton/chain-as-agent",
-  "version": "1.0.19",
+  "version": "1.0.21",
   "type": "module",
   "description": "Chain-as-Agent extension for PI registry enables composable agent workflows",
   "author": "Agpenton <agpenton@example.com>",
