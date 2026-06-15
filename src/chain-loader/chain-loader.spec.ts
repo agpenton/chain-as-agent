@@ -36,7 +36,13 @@ describe('ChainLoader', () => {
     mockFsExistsSync = vi.mocked(fs.existsSync);
     mockFsReaddirSync = vi.mocked(fs.readdirSync);
     mockFsReadFileSync = vi.mocked(fs.readFileSync);
-    mockParseYaml = vi.mocked<any>((await import('yaml')).parseYaml);
+  beforeEach(() => {
+    if (!chainLoader) chainLoader = new ChainLoader();
+    mockFsExistsSync = vi.mocked(fs.existsSync);
+    mockFsReaddirSync = vi.mocked(fs.readdirSync);
+    mockFsReadFileSync = vi.mocked(fs.readFileSync);
+    mockParseYaml = vi.mocked((await import('yaml')).parseYaml);
+  });
   });
 
   afterEach(() => {
