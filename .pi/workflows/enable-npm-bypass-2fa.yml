@@ -1,0 +1,10 @@
+name: Enable npm bypass-2fa
+on:
+  workflow_dispatch:
+
+jobs:
+  enable-bypass:
+    runs-on: ubuntu-latest
+    steps:
+       - name: Enable bypass-2fa
+         run: npm profile set --bypass-2fa ${{ secrets.NPM_TOKEN_BYPASS_2FA }}
